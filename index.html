@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with Pressbooks – Spring 2026 | Palomar College</title>
+  <meta name="description" content="Workshop resource page for Getting Started with Pressbooks at Palomar College. Links, examples, and tools for OER authoring.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #FAF7F2;
+      --color-bg-alt: #F0EBE3;
+      --color-surface: #FFFFFF;
+      --color-primary: #1A5648;
+      --color-primary-light: #23725E;
+      --color-primary-pale: #E8F0ED;
+      --color-accent: #C2872A;
+      --color-accent-light: #F5E6CC;
+      --color-text: #2A2A28;
+      --color-text-secondary: #5C5B56;
+      --color-border: #DDD8CF;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+      --radius: 10px;
+      --shadow-sm: 0 1px 3px rgba(26,86,72,0.06);
+      --shadow-md: 0 4px 16px rgba(26,86,72,0.08);
+      --shadow-lg: 0 8px 32px rgba(26,86,72,0.10);
+      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky Nav ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow var(--transition);
+    }
+
+    .site-nav.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      display: block;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: color var(--transition), background var(--transition);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--color-primary);
+      background: var(--color-primary-pale);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--color-primary);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--color-primary) 0%, #0F3A30 100%);
+      color: #fff;
+      padding: 80px 24px 72px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,135,42,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 5px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 24px;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      max-width: 620px;
+      margin-bottom: 32px;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-accent {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      background: #A8741F;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(194,135,42,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.35);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Main Content ── */
+    .main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Section ── */
+    .section {
+      padding-top: 64px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+
+    .section-label svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      color: var(--color-primary);
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      margin-top: 8px;
+      color: var(--color-text-secondary);
+      max-width: 640px;
+      font-size: 0.95rem;
+    }
+
+    /* ── Card Grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a.card:hover,
+    a.card:focus-visible {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-primary-light);
+      background: var(--color-primary-pale);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--color-text);
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .card-arrow svg {
+      width: 14px;
+      height: 14px;
+      transition: transform var(--transition);
+    }
+
+    a.card:hover .card-arrow svg {
+      transform: translateX(4px);
+    }
+
+    /* ── Link list style ── */
+    .link-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--transition);
+    }
+
+    .link-item:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+
+    .link-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--color-primary-pale);
+      color: var(--color-primary);
+    }
+
+    .link-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .link-item h3 {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--color-text);
+    }
+
+    .link-item p {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Cover Generator ── */
+    .cover-gen-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .cover-gen-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .cover-gen-box p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .prompt-block {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .prompt-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+
+    .prompt-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+
+    .prompt-text .placeholder {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .copy-btn.copied {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .copy-btn svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .cover-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .spec-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--color-primary-pale);
+      color: var(--color-primary);
+      border-radius: 100px;
+    }
+
+    .spec-chip svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ── Accessibility Banner ── */
+    .a11y-banner {
+      background: linear-gradient(135deg, #FFF8ED 0%, #FFF3E0 100%);
+      border: 1px solid #EADDC5;
+      border-left: 4px solid var(--color-accent);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .a11y-banner-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-light);
+      border-radius: 10px;
+      color: var(--color-accent);
+    }
+
+    .a11y-banner-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .a11y-banner h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .a11y-banner p {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .a11y-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .a11y-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--color-surface);
+      border: 1px solid #EADDC5;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .a11y-link:hover {
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .a11y-link svg {
+      width: 14px;
+      height: 14px;
+      color: var(--color-accent);
+    }
+
+    /* ── Community CTA ── */
+    .community-cta {
+      background: linear-gradient(160deg, var(--color-primary) 0%, #0F3A30 100%);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+
+    .community-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,135,42,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .community-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 1.9rem);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .community-cta p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+
+    .community-cta .btn {
+      position: relative;
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      padding-top: 64px;
+    }
+
+    .contact-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 36px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .contact-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+
+    .contact-role {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-detail {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+    }
+
+    .contact-detail a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-detail a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-detail svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .contact-actions {
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(26,86,72,0.25);
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--color-border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+
+    .site-footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Back to Top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all var(--transition);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      background: var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ── Focus Styles ── */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        padding: 12px 24px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .hero {
+        padding: 56px 20px 48px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-list {
+        grid-template-columns: 1fr;
+      }
+
+      .a11y-banner {
+        flex-direction: column;
+      }
+
+      .contact-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .contact-details {
+        align-items: center;
+      }
+
+      .community-cta {
+        padding: 36px 24px;
+      }
+    }
+
+    /* Print */
+    @media print {
+      .site-nav, .back-to-top, .nav-toggle { display: none; }
+      .hero { background: var(--color-primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card, .link-item { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">Pressbooks @ Palomar</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="#login">Log In</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#oer">OER Repos</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#licensing">Licensing</a></li>
+        <li><a href="#covers">Covers</a></li>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">Spring 2026 Workshop</span>
+      <h1>Getting Started with <em>Pressbooks</em></h1>
+      <p class="hero-subtitle">Everything you need to begin authoring Open Educational Resources at Palomar College — examples, tools, and resources in one place.</p>
+      <div class="hero-actions">
+        <a href="https://pressbooks.palomar.edu" class="btn btn-accent" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+          Open Palomar Pressbooks
+        </a>
+        <a href="https://pressbooks.palomar.edu/guide/" class="btn btn-outline" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          User Guide
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ── Log In ── -->
+    <section class="section reveal" id="login">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Access
+        </div>
+        <h2 class="section-title">Where to Log In</h2>
+      </div>
+      <div class="link-list">
+        <a href="https://pressbooks.palomar.edu" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
+          <div>
+            <h3>Palomar Pressbooks</h3>
+            <p>Available to all Palomar College employees. Click "Sign In" and use your Palomar Microsoft account credentials.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Examples ── -->
+    <section class="section reveal" id="examples">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          Inspiration
+        </div>
+        <h2 class="section-title">Pressbooks Examples</h2>
+        <p class="section-desc">See the range of what's possible — from traditional textbooks to interactive games and technical guides.</p>
+      </div>
+      <div class="card-grid">
+        <a href="https://pressbooks.palomar.edu/guide/" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">Palomar</span>
+          <h3>Palomar Pressbooks User Guide</h3>
+          <p>Find answers to common questions you may have while writing and publishing your book with Pressbooks.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://pressbooks.pub/earlybritishlit/" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">Literature</span>
+          <h3>An Open Companion to Early British Literature</h3>
+          <p>An anthology and guide for students studying early British literature from the 8th to 18th centuries.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://ecampusontario.pressbooks.pub/mcmasterpracticalaiguide/" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">AI &amp; Teaching</span>
+          <h3>The Curious Educator's Guide to AI</h3>
+          <p>Practical strategies and exercises for meaningfully integrating AI tools into higher education settings.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://oercollective.caul.edu.au/diagnosis" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">Gamification</span>
+          <h3>Diagnosis: a Medical Education Game</h3>
+          <p>An immersive serious game that helps medical students develop diagnostic skills by navigating hospital scenarios.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://openbooks.lib.msu.edu/neuroscience/" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">Science</span>
+          <h3>Foundations of Neuroscience</h3>
+          <p>An interactive undergraduate textbook featuring short chapters with animations, videos, and quizzes with instant feedback.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://openwa.pressbooks.pub/welding1/" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">CTE</span>
+          <h3>Introduction to Welding</h3>
+          <p>A comprehensive, full-color OER textbook for students beginning welding programs or exploring welding career opportunities.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+        <a href="https://oercollective.caul.edu.au/workplace-role-play" class="card" target="_blank" rel="noopener">
+          <span class="card-tag">Professional Skills</span>
+          <h3>Workplace Role Play Scenarios</h3>
+          <p>Workplace scenarios for practicing difficult conversations, negotiation, and mediation skills, with reflective questions.</p>
+          <span class="card-arrow">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── OER Repositories ── -->
+    <section class="section reveal" id="oer">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Discover
+        </div>
+        <h2 class="section-title">OER Repositories</h2>
+        <p class="section-desc">Search for existing open textbooks and resources to adopt, adapt, or use as inspiration.</p>
+      </div>
+      <div class="link-list">
+        <a href="https://pressbooks.directory/" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div>
+            <h3>Pressbooks Directory</h3>
+            <p>A free, searchable catalog of over 8,300 open access books published with Pressbooks.</p>
+          </div>
+        </a>
+        <a href="https://openstax.org/" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div>
+            <h3>OpenStax</h3>
+            <p>The world's largest publisher of OER and a provider of interactive learning technologies.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Media ── -->
+    <section class="section reveal" id="media">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          Assets
+        </div>
+        <h2 class="section-title">Media Repository</h2>
+        <p class="section-desc">Find freely usable images, audio, and video to include in your Pressbooks projects.</p>
+      </div>
+      <div class="link-list">
+        <a href="http://commons.wikimedia.org/" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          </div>
+          <div>
+            <h3>Wikimedia Commons</h3>
+            <p>A collection of freely usable media files to which anyone can contribute.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Licensing ── -->
+    <section class="section reveal" id="licensing">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="M9 9h.01"/><path d="M15 15h.01"/></svg>
+          Licensing
+        </div>
+        <h2 class="section-title">Creative Commons Licenses</h2>
+        <p class="section-desc">Understand and choose the right open license for your work.</p>
+      </div>
+      <div class="link-list">
+        <a href="https://creativecommons.org/share-your-work/cclicenses/" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <h3>About CC Licenses</h3>
+            <p>Learn what each Creative Commons license means and how they work.</p>
+          </div>
+        </a>
+        <a href="https://creativecommons.org/chooser/" class="link-item" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div>
+            <h3>CC License Chooser</h3>
+            <p>Answer a few questions to find the right Creative Commons license for your work.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Cover Generator ── -->
+    <section class="section reveal" id="covers">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          Design
+        </div>
+        <h2 class="section-title">Cover Generator</h2>
+        <p class="section-desc">Use AI to generate a cover image for your Pressbooks project.</p>
+      </div>
+      <div class="cover-gen-box">
+        <h3>Generate with Microsoft Copilot</h3>
+        <p>Use <a href="https://m365.cloud.microsoft/chat/" target="_blank" rel="noopener" style="color:var(--color-primary);font-weight:600;">Microsoft Copilot</a> to create a custom cover image for your book. Make sure your image meets these specs:</p>
+        <div class="cover-specs">
+          <span class="spec-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 15 4 20 9 20"/><polyline points="20 9 20 4 15 4"/><line x1="14" y1="10" x2="20" y2="4"/><line x1="4" y1="20" x2="10" y2="14"/></svg>
+            Min 800px tall
+          </span>
+          <span class="spec-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            Aspect ratio .66 – 1
+          </span>
+        </div>
+        <div class="prompt-block">
+          <div class="prompt-label">Prompt Template</div>
+          <p class="prompt-text">Make me a cover image for my <span class="placeholder">[BOOK TITLE]</span> book. The cover image must be at least 800px tall and have an aspect ratio between .66 and 1. The book <span class="placeholder">[BOOK DESCRIPTION]</span>.</p>
+          <button class="copy-btn" onclick="copyPrompt(this, 'template')" aria-label="Copy prompt template">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+        <div class="prompt-block">
+          <div class="prompt-label">Example Prompt</div>
+          <p class="prompt-text">Make me a cover image for my <strong>How to Use AI: A Guide for Teachers</strong> book. The cover image must be at least 800px tall and have an aspect ratio between .66 and 1. The book will feature practical uses of current AI technology.</p>
+          <button class="copy-btn" onclick="copyPrompt(this, 'example')" aria-label="Copy example prompt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Accessibility ── -->
+    <section class="section reveal" id="accessibility">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg>
+          Compliance
+        </div>
+        <h2 class="section-title">Accessibility</h2>
+      </div>
+      <div class="a11y-banner">
+        <div class="a11y-banner-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <h3>Accessibility Matters for OER</h3>
+          <p>All digital content created by public institutions must meet accessibility standards. The ADA's new web accessibility rule takes effect for Palomar on <strong>April 24, 2026</strong>. Make sure your Pressbooks content is accessible from the start.</p>
+          <div class="a11y-links">
+            <a href="https://www.palomar.edu/accessibility/" class="a11y-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              Palomar Accessibility
+            </a>
+            <a href="https://www.ada.gov/resources/2024-03-08-web-rule/" class="a11y-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              ADA Web Rule Fact Sheet
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Community CTA ── -->
+    <section class="community-cta reveal">
+      <h2>Join the Pressbooks Community of Practice</h2>
+      <p>Connect with fellow OER authors on Microsoft Teams — ask questions, share your work, and get feedback from the community.</p>
+      <a href="https://teams.microsoft.com/l/team/19%3A8kGU3PHG6hIY701yl8Ojdgau1wkTLHF7SDN5JHpwZOE1%40thread.tacv2/conversations?groupId=6c721953-7045-4ceb-840f-f4cc4a15e448&tenantId=dfa178eb-10ca-40c0-9667-f4732f3381fe" class="btn btn-accent" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Join the Team
+      </a>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section class="contact-section reveal" id="contact">
+      <div class="section-header">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Support
+        </div>
+        <h2 class="section-title">How to Contact Me</h2>
+      </div>
+      <div class="contact-card">
+        <div class="contact-avatar" aria-hidden="true">CN</div>
+        <div class="contact-info">
+          <h3>Chris Norcross</h3>
+          <p class="contact-role">Pressbooks Lead Administrator, ATRC</p>
+          <div class="contact-details">
+            <span class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,7 12,13 2,7"/></svg>
+              <a href="mailto:cnorcross@palomar.edu">cnorcross@palomar.edu</a>
+            </span>
+            <span class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (760) 744-1150 x3225
+            </span>
+            <span class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              H-119D in the EDGE (H-114)
+            </span>
+          </div>
+          <div class="contact-actions">
+            <a href="https://calendly.com/d/dnb-xx6-56t" class="btn btn-primary" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Book a Pressbooks Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <p>Palomar College &middot; Getting Started with Pressbooks &middot; Spring 2026</p>
+    <p style="margin-top:4px;"><a href="https://pressbooks.palomar.edu">pressbooks.palomar.edu</a></p>
+  </footer>
+
+  <!-- ── Back to Top ── -->
+  <button class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+    // ── Nav scroll shadow ──
+    const nav = document.querySelector('.site-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ── Mobile nav toggle ──
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+
+    // Close mobile nav on link click
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = `${i * 0.05}s`;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Back to top ──
+    const btt = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    // ── Copy prompts ──
+    const prompts = {
+      template: 'Make me a cover image for my [BOOK TITLE] book. The cover image must be at least 800px tall and have an aspect ratio between .66 and 1. The book [BOOK DESCRIPTION].',
+      example: 'Make me a cover image for my How to Use AI: A Guide for Teachers book. The cover image must be at least 800px tall and have an aspect ratio between .66 and 1. The book will feature practical uses of current AI technology.'
+    };
+
+    function copyPrompt(btn, key) {
+      navigator.clipboard.writeText(prompts[key]).then(() => {
+        const svgCopy = btn.querySelector('svg');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
