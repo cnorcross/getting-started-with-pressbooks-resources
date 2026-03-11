@@ -17,6 +17,8 @@
       --color-primary-light: #23725E;
       --color-primary-pale: #E8F0ED;
       --color-accent: #C2872A;
+      --color-accent-text: #7B5419;    /* darkened amber: 6.3:1 on cream, 6.7:1 on white */
+      --color-accent-hero: #CB9430;    /* lighter amber: 3.2:1 on dark green hero */
       --color-accent-light: #F5E6CC;
       --color-text: #2A2A28;
       --color-text-secondary: #5C5B56;
@@ -193,7 +195,7 @@
 
     .hero h1 em {
       font-style: italic;
-      color: var(--color-accent);
+      color: var(--color-accent-hero);
     }
 
     .hero-subtitle {
@@ -279,7 +281,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--color-accent);
+      color: var(--color-accent-text);
       margin-bottom: 8px;
     }
 
@@ -469,7 +471,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--color-accent);
+      color: var(--color-accent-text);
       margin-bottom: 8px;
     }
 
@@ -480,7 +482,7 @@
     }
 
     .prompt-text .placeholder {
-      color: var(--color-accent);
+      color: var(--color-accent-text);
       font-weight: 600;
     }
 
