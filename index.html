@@ -88,24 +88,33 @@
     }
 
     .nav-links {
-      display: flex;
-      gap: 4px;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 24px;
+      box-shadow: var(--shadow-md);
       list-style: none;
-      overflow-x: auto;
-      scrollbar-width: none;
+      gap: 2px;
+      z-index: 99;
     }
 
-    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links.open {
+      display: flex;
+    }
 
     .nav-links a {
       display: block;
-      padding: 6px 14px;
-      font-size: 0.82rem;
+      padding: 8px 14px;
+      font-size: 0.9rem;
       font-weight: 500;
       color: var(--color-text-secondary);
       text-decoration: none;
       border-radius: 6px;
-      white-space: nowrap;
       transition: color var(--transition), background var(--transition);
       letter-spacing: 0.01em;
     }
@@ -116,8 +125,14 @@
       background: var(--color-primary-pale);
     }
 
+    .nav-links a.active {
+      color: var(--color-primary);
+      background: var(--color-primary-pale);
+      font-weight: 600;
+    }
+
     .nav-toggle {
-      display: none;
+      display: block;
       background: none;
       border: none;
       cursor: pointer;
@@ -618,6 +633,62 @@
       color: var(--color-accent);
     }
 
+    /* ── Accessibility Checklist ── */
+    .a11y-checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .a11y-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .a11y-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .a11y-card h3 svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--color-accent);
+    }
+
+    .a11y-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .a11y-card ul li {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      line-height: 1.45;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .a11y-card ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
     /* ── Community CTA ── */
     .community-cta {
       background: linear-gradient(160deg, var(--color-primary) 0%, #0F3A30 100%);
@@ -832,27 +903,6 @@
 
     /* ── Mobile ── */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background: var(--color-bg);
-        border-bottom: 1px solid var(--color-border);
-        padding: 12px 24px;
-        box-shadow: var(--shadow-md);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
       .hero {
         padding: 56px 20px 48px;
       }
@@ -1150,6 +1200,7 @@
           Compliance
         </div>
         <h2 class="section-title">Accessibility</h2>
+        <p class="section-desc">Accessibility is not extra — it is essential. Designing so everyone can learn and participate is a legal requirement, a personal responsibility, and a shared mission.</p>
       </div>
       <div class="a11y-banner">
         <div class="a11y-banner-icon">
@@ -1157,7 +1208,7 @@
         </div>
         <div>
           <h3>Accessibility Matters for OER</h3>
-          <p>All digital content created by public institutions must meet accessibility standards. The ADA's new web accessibility rule takes effect for Palomar on <strong>April 24, 2026</strong>. Make sure your Pressbooks content is accessible from the start.</p>
+          <p>The ADA's new web accessibility rule takes effect for Palomar on <strong>April 24, 2026</strong>. Make sure your Pressbooks content is accessible from the start.</p>
           <div class="a11y-links">
             <a href="https://www.palomar.edu/accessibility/" class="a11y-link" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
@@ -1168,6 +1219,69 @@
               ADA Web Rule Fact Sheet
             </a>
           </div>
+        </div>
+      </div>
+
+      <div class="a11y-checklist">
+        <div class="a11y-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Links
+          </h3>
+          <ul>
+            <li>Is opening in a new window expected?</li>
+            <li>Is the link text a URL?</li>
+            <li>Link with no accessible text</li>
+            <li>Is the linked document accessible?</li>
+            <li>Is this link meaningful and concise?</li>
+          </ul>
+        </div>
+        <div class="a11y-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            Images &amp; Alt Text
+          </h3>
+          <ul>
+            <li>Alt text is missing or meaningless</li>
+            <li>Very long alt text</li>
+            <li>Linked image has no alt text</li>
+            <li>Possibly redundant text in alt</li>
+            <li>Image's text alternative is unpronounceable</li>
+          </ul>
+        </div>
+        <div class="a11y-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+            Headings
+          </h3>
+          <ul>
+            <li>Should this be a heading?</li>
+            <li>Was a heading level skipped?</li>
+            <li>Heading tag without any text</li>
+            <li>Long heading</li>
+          </ul>
+        </div>
+        <div class="a11y-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+            Tables
+          </h3>
+          <ul>
+            <li>Table has no header cells</li>
+            <li>Empty table header cell</li>
+            <li>Content heading inside a table</li>
+          </ul>
+        </div>
+        <div class="a11y-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m12 20 7-7-7-7"/><path d="M5 20V4"/></svg>
+            Formatting &amp; Media
+          </h3>
+          <ul>
+            <li>Is this uppercase text needed?</li>
+            <li>Should this have list formatting?</li>
+            <li>Is this video accurately captioned?</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -1239,6 +1353,27 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
+
+    // ── Active nav link ──
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sectionIds = Array.from(navAnchors).map(a => a.getAttribute('href').slice(1));
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    function setActiveNav(id) {
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveNav(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => sectionObserver.observe(s));
 
     // ── Mobile nav toggle ──
     const toggle = document.querySelector('.nav-toggle');
