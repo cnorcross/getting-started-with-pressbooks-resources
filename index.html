@@ -1251,12 +1251,23 @@
     const sectionIds = Array.from(navAnchors).map(a => a.getAttribute('href').slice(1));
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
+    const navLinks = document.querySelector('.nav-links');
+
     function setActiveNav(id) {
       navAnchors.forEach(a => {
         const isActive = a.getAttribute('href') === `#${id}`;
         a.classList.toggle('active', isActive);
         if (isActive) {
-          a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          // Scroll the nav-links container horizontally so the active link is visible
+          const linkLeft = a.offsetLeft;
+          const linkRight = linkLeft + a.offsetWidth;
+          const containerLeft = navLinks.scrollLeft;
+          const containerRight = containerLeft + navLinks.offsetWidth;
+          if (linkLeft < containerLeft) {
+            navLinks.scrollLeft = linkLeft - 16;
+          } else if (linkRight > containerRight) {
+            navLinks.scrollLeft = linkRight - navLinks.offsetWidth + 16;
+          }
         }
       });
     }
